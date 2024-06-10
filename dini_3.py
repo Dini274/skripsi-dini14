@@ -258,9 +258,6 @@ def informasi_artikel():
     # Load data
     df = pd.read_csv('resultTopic.csv')
 
-    # Display column names to ensure correct column names are used
-    st.write("Columns in the dataset:", df.columns.tolist())
-
     # Filter by topic
     topic_options = sorted(df['Topic'].unique())
     selected_topic = st.selectbox("Pilih Topik", topic_options)
