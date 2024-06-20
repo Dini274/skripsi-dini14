@@ -24,7 +24,18 @@ nlp = spacy.blank("id")
 def home_page():
     st.title("Home Page")
     st.header("Selamat datang di sistem Topic Modeling")
-    st.write("Topic Modeling dilakukan menggunakan BERTopic untuk menganalisis topik-topik dalam artikel berita online terkait Pemilihan Umum (Pemilu) Indonesia 2024. Data yang digunakan merupakan meta deskripsi artikel berita pada sub kanal pemilu di Detik.com mulai dari tanggal 1 September 2023 hingga 14 Februari 2024")
+    st.write(
+        "Topic Modeling dilakukan menggunakan BERTopic untuk menganalisis topik-topik dalam artikel berita online terkait Pemilihan Umum (Pemilu) Indonesia 2024. Data yang digunakan merupakan meta deskripsi artikel berita pada [sub kanal pemilu di Detik.com](https://news.detik.com/pemilu) mulai dari tanggal 1 September 2023 hingga 14 Februari 2024."
+    )
+    
+    st.write("Berikut langkah-langkah yang dilakukan pada penelitian ini:")
+    st.write("1. Preprocessing : Case Folding, Cleaning, Tokenizing dan Removal Stopword")
+    st.write("2. Pemodelan Topik dengan BERTopic")
+
+    # Menampilkan gambar dari file lokal
+    st.image('default.svg', width=400) 
+    st.markdown("[Kunjungi BERTopic](https://maartengr.github.io/BERTopic/algorithm/algorithm.html)")
+
 
 def proses_page():
     st.title("BERTopic Page")        
@@ -258,6 +269,10 @@ def informasi_artikel():
     # Load data
     df = pd.read_csv('resultTopic.csv')
 
+    # Display raw data
+    st.write("Data hasil akhir (resultTopic.csv):")
+    st.dataframe(df.iloc[:, 0:8])
+
     # Filter by topic
     topic_options = sorted(df['Topic'].unique())
     selected_topic = st.selectbox("Pilih Topik", topic_options)
@@ -275,12 +290,8 @@ def informasi_artikel():
             else:
                 st.error("Kolom 'link' atau 'Document' tidak ditemukan di dataset.")
 
-        # Display raw data
-        st.write("Data hasil akhir (resultTopic.csv):")
-        st.dataframe(df.iloc[:, 0:8])
-
-        st.write("Finish") 
-        st.success("Proses Finish")
+    st.write("Finish") 
+    st.success("Proses Finish")
 
 pages = {
     "Home": home_page,    
